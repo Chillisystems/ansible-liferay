@@ -1,0 +1,18 @@
+# Systemd unit file for tomcat
+[Unit]
+Description=Apache Tomcat Web Application Container
+After=syslog.target network.target
+
+[Service]
+Type=forking
+ExecStart={{ liferay_home }}/{{ liferay_tomcat_folder }}/bin/startup.sh
+ExecStop={{ liferay_home }}/{{ liferay_tomcat_folder }}/bin/shutdown.sh
+User={{ liferay_os_user }}
+Group={{ liferay_os_group }}
+
+TimeoutStartSec=0
+TimeoutStopSec=600
+
+[Install]
+WantedBy=multi-user.target
+

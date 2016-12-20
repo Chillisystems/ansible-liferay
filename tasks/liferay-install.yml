@@ -13,26 +13,26 @@
   register: liferay_archive_stat
   sudo: false
   failed_when: liferay_archive_stat.stat.exists == false
-  
+
 - name: Make sure unzip is installed
   sudo: yes
-  apt: name={{ item }} state=present
+  yum: name={{ item }} state=present
   with_items:
-   - unzip 
+   - unzip
 
 - name: Get the Liferay main folder from the archive
   local_action: >
-    shell unzip -v {{ liferay_archive.local }} | grep -P "^[^\/]*/$" | grep -P "[^\s]*$" -o | grep -P '[^/]*' -o
+    shell unzip -v {{ liferay_archive.local }} | grep -e "^[^\/]*/$" | grep -o -e "\S*$" | grep -o -e '[^/]*'|grep -v -e '^$' 
   register: liferay_folder_from_zip
   sudo: false
   changed_when: false
-  
-- name: Copy and unpack Liferay archive 
+
+- name: Copy and unpack Liferay archive
   sudo: yes
-  unarchive: 
+  unarchive:
     src: "{{ liferay_archive.local }}"
     dest: "{{ liferay_unpack_folder }}"
     copy: yes
     creates: "{{ liferay_home }}"
 
-    
+
