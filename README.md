@@ -85,7 +85,7 @@ liferay_cluster_autodetect: google.com:80
 Dependencies
 ------------
 
-None
+Works only on CentOS 7  
 
 Example Playbook
 ----------------
@@ -94,7 +94,7 @@ The simplest form
 
     - hosts: servers
       roles:
-        - role: milendyankov.liferay
+        - role: ansible-liferay
 
 will 
  
@@ -110,7 +110,7 @@ with shared database and file system, something like this can be provided:
 
     - hosts: servers
       roles:
-        - role: milendyankov.liferay
+        - role: ansible-liferay
           liferay_archive: 
             local: <PATH_TO_STORE_FILE>
             url: "<DOWNLOAD_URL>" 
@@ -127,7 +127,7 @@ If there are more databases Liferay needs to connect to, they can be added like 
 
     - hosts: servers
       roles:
-        - role: milendyankov.liferay
+        - role: ansible-liferay
           liferay_archive: 
             local: <PATH_TO_STORE_FILE>
             url: "<DOWNLOAD_URL>" 

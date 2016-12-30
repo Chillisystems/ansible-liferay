@@ -26,9 +26,11 @@
   
 - name: Add liferay service
   sudo: yes
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
   template: src=liferay.service dest=/usr/lib/systemd/system/liferay.service mode=0660
   
 - service:
     name: liferay
     enabled: yes
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
     state: started
